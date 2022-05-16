@@ -2,7 +2,7 @@
   <div class="login-container">
     <el-form ref="formRef" :model="form" class="login-form" :rules="rules">
       <div class="title-container">
-        <h3 class="title">用户登录</h3>
+        <h3 class="title">{{ $t('login.title') }}</h3>
       </div>
       <el-form-item prop="username">
         <svg-icon icon="user" class="svg-container"></svg-icon>
@@ -14,12 +14,13 @@
         <el-input v-model="form.password" :type="passwordType"></el-input>
         <svg-icon
           :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
-          @click="changType"
+          @click="changeType"
         ></svg-icon>
       </el-form-item>
-      <el-button type="primary" class="login-button" @click="handleLogin"
-        >登录</el-button
-      >
+      <el-button type="primary" class="login-button" @click="handleLogin">{{
+        // 登录
+        $t('login.btnTitle')
+      }}</el-button>
     </el-form>
   </div>
 </template>
@@ -27,6 +28,7 @@
 <script setup>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+// useStore 返回一个对象！
 const store = useStore()
 
 const form = ref({
@@ -64,7 +66,7 @@ const handleLogin = () => {
 }
 
 const passwordType = ref('password')
-const changType = () => {
+const changeType = () => {
   if (passwordType.value === 'password') {
     passwordType.value = 'text'
   } else {

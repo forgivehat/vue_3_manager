@@ -28,6 +28,7 @@ module.exports = {
         })
       )
   },
+
   chainWebpack(config) {
     // 设置 svg-sprite-loader
     // config 为 webpack 配置对象
@@ -74,6 +75,7 @@ module.exports = {
       })
       .end()
   },
+
   devServer: {
     https: false,
     // hotOnly: false,
@@ -87,6 +89,7 @@ module.exports = {
       }
     }
   },
+
   css: {
     loaderOptions: {
       sass: {
