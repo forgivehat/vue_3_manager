@@ -20,11 +20,14 @@ import Menu from './Menu'
 import Headers from './headers'
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-// const asideWidth = ref('210px')
+import variables from '@/styles/variables.module.scss'
+
 const store = useStore()
 const asideWidth = computed(() => {
-  // 全局样式引入有点问题，只能写死
-  return store.getters.siderType ? '210px' : '67px'
+  // 全局样式引入有点问题
+  return store.getters.siderType
+    ? variables.sideBarWidth
+    : variables.hideSideBarWidth
 })
 </script>
 

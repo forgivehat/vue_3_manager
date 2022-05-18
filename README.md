@@ -22,3 +22,7 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### 原始sass版本
+"sass": "^1.32.7",
+"sass-loader": "^12.0.0"

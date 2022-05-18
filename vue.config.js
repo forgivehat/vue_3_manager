@@ -94,7 +94,7 @@ module.exports = {
     loaderOptions: {
       sass: {
         // 8版本用prependData (在package.json里看sass版本):
-        additionalData: `
+        prependData: `
           @import "@/styles/variables.scss";  // scss文件地址
           @import "@/styles/mixin.scss";     // scss文件地址
         `
