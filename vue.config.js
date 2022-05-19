@@ -13,20 +13,75 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 const webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+let cesiumSource = './node_modules/cesium/Source'
+let cesiumWorkers = 'Workers'
 
 module.exports = {
   // ...
-  configureWebpack: (config) => {
-    config.plugins.push(
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': path.resolve('src')
+      }
+    },
+    amd: {
+      // Cesium源码模块化使用的requireJs
+      // 此配置允许webpack友好地在铯中使用require，使webpack打包cesium
+      // 告诉Cesium, AMD的webpack版本用来评估要求的声明是不符合标准的toUrl功能
+      toUrlUndefined: true
+    },
+    plugins: [
       AutoImport({
         resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.join(cesiumSource, cesiumWorkers),
+            to: 'Workers'
+          }
+        ]
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.join(cesiumSource, 'Assets'),
+            to: 'Assets'
+          }
+        ]
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.join(cesiumSource, 'Widgets'),
+            to: 'Widgets'
+          }
+        ]
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: path.join(cesiumSource, 'ThirdParty/Workers'),
+            to: 'ThirdParty/Workers'
+          }
+        ]
+      }),
+      new webpack.DefinePlugin({
+        CESIUM_BASE_URL: JSON.stringify('./')
+      }),
+      // 使Cesium对象实例可在每个js中使用而无须import
+      new webpack.ProvidePlugin({
+        Cesium: ['cesium/Source/Cesium']
       })
-    ),
-      config.plugins.push(
-        Components({
-          resolvers: [ElementPlusResolver()]
-        })
-      )
+    ],
+    module: {
+      unknownContextCritical: false,
+      unknownContextRegExp: /\/cesium\/cesium\/Source\/Core\/buildModuleUrl\.js/
+    }
   },
 
   chainWebpack(config) {

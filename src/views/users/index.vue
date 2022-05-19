@@ -14,9 +14,11 @@
       <el-button type="primary">{{ $t('table.adduser') }}</el-button>
     </el-row>
   </el-card>
+  <Cesium></Cesium>
 </template>
 
 <script setup>
+import Cesium from '@/components/Cesium.vue'
 import { Search } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 const queryForm = ref({
