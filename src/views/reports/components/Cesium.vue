@@ -4,7 +4,7 @@
 
 <script>
 import 'cesium/Source/Widgets/widgets.css'
-import { Viewer, FeatureDetection, Ion, Cartesian3, Math, Color } from 'cesium'
+import { Viewer, FeatureDetection, Ion, Cartesian3, Math } from 'cesium'
 export default {
   mounted() {
     Ion.defaultAccessToken =
@@ -12,7 +12,6 @@ export default {
     const viewer = new Viewer('cesiumContainer')
     this.init(viewer)
     this.setCenter(viewer)
-    this.drawLine(viewer)
   },
   methods: {
     init(viewer) {
@@ -26,7 +25,7 @@ export default {
       viewer.camera.flyTo({
         // Cesium的坐标是以地心为原点，一向指向南美洲，一向指向亚洲，一向指向北极州
         // fromDegrees()方法，将经纬度和高程转换为世界坐标
-        destination: Cartesian3.fromDegrees(108.95, 34.26, 1000.0),
+        destination: Cartesian3.fromDegrees(108.95, 34.26, 5000000.0),
         orientation: {
           // 指向
           heading: Math.toRadians(0, 0),
@@ -35,19 +34,6 @@ export default {
           roll: 0.0
         }
       })
-    },
-    drawLine(viewer) {
-      viewer.entities.add({
-        name: 'Green rhumb line',
-        polyline: {
-          positions: Cartesian3.fromDegreesArray([
-            120.9677706, 30.7985748, 110.2, 34.55
-          ]),
-          width: 5,
-          material: Color.GREEN
-        }
-      })
-      viewer.zoomTo(viewer.entities)
     }
   }
 }
@@ -55,7 +41,7 @@ export default {
 
 <style lang="scss" scoped>
 #cesiumContainer {
-  position: absolute;
+  position: relative;
   height: 100%;
   width: 100%;
 }

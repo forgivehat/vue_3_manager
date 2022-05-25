@@ -1,7 +1,11 @@
 <template>
-  <div>reports</div>
+  <div>
+    <Cesium />
+  </div>
 </template>
 
-<script setup></script>
+<script setup>
+import Cesium from '@/views/reports/components/Cesium.vue'
+</script>
 
 <style lang="scss" scoped></style>

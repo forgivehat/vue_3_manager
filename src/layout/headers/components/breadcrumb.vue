@@ -21,7 +21,7 @@ const BreadcrumbList = ref([])
 
 const initBreadcrumbList = () => {
   BreadcrumbList.value = route.matched
-  console.log(route.matched)
+  // console.log(route.matched)
 }
 
 const handleRedirect = (path) => {

@@ -3085,7 +3085,7 @@
     "temp" "^0.9.0"
     "word-wrap" "^1.2.3"
 
-"dayjs@^1.10.7":
+"dayjs@^1.10.7", "dayjs@^1.11.2":
   "integrity" "sha512-F4LXf1OeU9hrSYRPTTj/6FbO4HTjPKXvEIC1P2kcnFurViINCVk3ZV0xAS3XVx9MkMsXbbqlK6hjseaYbgKEHw=="
   "resolved" "https://registry.npmjs.org/dayjs/-/dayjs-1.11.2.tgz"
   "version" "1.11.2"
